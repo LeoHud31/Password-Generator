@@ -54,11 +54,20 @@ def setup_window():
     tk.Label(window, text="Password Generator", font=("Arial", 18)).pack(pady=20)
 
     tk.Button(window, text="Generate Password", command=on_generate_password, font=("Arial", 14)).pack(pady=10)
+    
     output_frame = tk.LabelFrame(text="Results", font=("Arial", 14))
     output_frame.pack(padx=10, pady=5, fill="both", expand=True)
-    output_list = tk.Listbox(output_frame, height=10, font=("Arial", 14))
+
+    scrollbar = tk.Scrollbar(output_frame)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    output_list = tk.Listbox(output_frame, height=10, font=("Arial", 14), yscrollcommand=scrollbar.set)
     output_list.pack(padx=5, pady=5, fill="both", expand=True)
+
+    scrollbar.config(command=output_list.yview)
+
     output_list.insert(tk.END, "Generated Password:")
+
     window.mainloop()
 
 
