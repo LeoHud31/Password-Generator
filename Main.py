@@ -38,18 +38,19 @@ def generate_password():
     password = f"{word1}{num1}{schar1}{word2}{num2}{schar1}"
     return password
 
-def setup_window():   
+def setup_window():
+    def on_generate_password():
+        output_list.insert(tk.END, generate_password())   
     window = tk.Tk()
     window.title("Password Generator")
     window.geometry("600x600")
     tk.Label(window, text="Password Generator", font=("Arial", 18)).pack(pady=20)
-    tk.Button(window, text="Generate Password", command=lambda: generate_password()).pack(pady=10)
+    tk.Button(window, text="Generate Password", command=on_generate_password).pack(pady=10)
     output_frame = tk.LabelFrame(text="Results")
     output_frame.pack(padx=10, pady=5, fill="both", expand=True)
     output_list = tk.Listbox(output_frame, height=10)
     output_list.pack(padx=5, pady=5, fill="both", expand=True)
     output_list.insert(tk.END, "Generated Password:")
-    output_list.insert(tk.END, generate_password())
     window.mainloop()
 
 if __name__ == "__main__":
